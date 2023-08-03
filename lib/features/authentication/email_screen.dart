@@ -42,20 +42,16 @@ class _EmailScreenState extends State<EmailScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Gaps.v40,
-              const Text("Create username",
+              const Text("What is your email?",
                   style: TextStyle(
                     fontSize: Sizes.size20,
                     fontWeight: FontWeight.w600,
                   )),
-              Gaps.v8,
-              const Text("You can always change this later",
-                  style:
-                      TextStyle(fontSize: Sizes.size16, color: Colors.black54)),
               Gaps.v16,
               TextField(
                 controller: _usernameController,
                 decoration: InputDecoration(
-                  hintText: "Username",
+                  hintText: "Email",
                   enabledBorder: UnderlineInputBorder(
                     borderSide: BorderSide(
                       color: Colors.grey.shade400,
