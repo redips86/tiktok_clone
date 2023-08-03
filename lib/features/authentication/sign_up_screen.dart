@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:tiktok_clone/features/authentication/email_screen.dart';
+import 'package:tiktok_clone/features/authentication/username_screen.dart';
 import 'package:tiktok_clone/features/authentication/widgets/auth_button.dart';
 
 import '../../constants/gaps.dart';
@@ -15,12 +15,10 @@ class SignUpScreen extends StatelessWidget {
         .push(MaterialPageRoute(builder: (context) => const LoginScreen()));
   }
 
-
   void _onEmailTap(BuildContext context) {
-    Navigator.of(context).push(
-        MaterialPageRoute(builder: (context) => const EmailScreen()));
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => const EmailScreen()));
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -74,9 +72,7 @@ class SignUpScreen extends StatelessWidget {
                 child: Text(
                   "Log in",
                   style: TextStyle(
-                      color: Theme
-                          .of(context)
-                          .primaryColor,
+                      color: Theme.of(context).primaryColor,
                       fontWeight: FontWeight.w600),
                 ),
               ),
@@ -86,6 +82,4 @@ class SignUpScreen extends StatelessWidget {
       ),
     );
   }
-
-
 }
