@@ -19,7 +19,6 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
   void _onSubmitTap() {
     if (_formKey.currentState != null && _formKey.currentState!.validate()) {
       _formKey.currentState!.save();
-      print(formData);
     }
   }
 

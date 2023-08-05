@@ -16,40 +16,39 @@ class LoginScreen extends StatelessWidget {
   }
 
   void _onEmailLoginTap(BuildContext context) {
-    Navigator.of(context).push(
-      MaterialPageRoute(builder: (builder) => const LoginFormScreen())
-    );
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (builder) => const LoginFormScreen()));
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body:  SafeArea(
+      body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 40),
+          padding: const EdgeInsets.symmetric(horizontal: 40),
           child: Column(
             children: [
               Gaps.v80,
-              Text(
+              const Text(
                 'Log in to TikTok',
                 style: TextStyle(
                     fontSize: Sizes.size24, fontWeight: FontWeight.w700),
               ),
               Gaps.v20,
-              Text(
+              const Text(
                 'Create a profile, follow other accounts, make your own videos, and more.',
                 style: TextStyle(fontSize: Sizes.size16, color: Colors.black45),
                 textAlign: TextAlign.center,
               ),
               Gaps.v40,
               GestureDetector(
-    onTap: () => _onEmailLoginTap(context),
-                child: AuthButton(
+                onTap: () => _onEmailLoginTap(context),
+                child: const AuthButton(
                     icon: FaIcon(FontAwesomeIcons.user),
                     text: "Use email & password"),
               ),
               Gaps.v16,
-              AuthButton(
+              const AuthButton(
                   icon: FaIcon(FontAwesomeIcons.apple),
                   text: "Continue with Apple")
             ],
@@ -81,6 +80,4 @@ class LoginScreen extends StatelessWidget {
       ),
     );
   }
-
-
 }
