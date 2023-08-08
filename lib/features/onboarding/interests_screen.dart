@@ -68,9 +68,10 @@ class _InterestsScreenState extends State<InterestsScreen> {
       });
     }
   }
-  
-  void _onNextTap(){
-    Navigator.push(context, MaterialPageRoute(builder: (context) => const TutorialScreen()));
+
+  void _onNextTap() {
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => const TutorialScreen()));
   }
 
   @override
@@ -93,7 +94,7 @@ class _InterestsScreenState extends State<InterestsScreen> {
       appBar: AppBar(
         title: AnimatedOpacity(
           opacity: _showTitle ? 1 : 0,
-          duration: Duration(milliseconds: 300),
+          duration: const Duration(milliseconds: 300),
           child: const Text("Choose your interests"),
         ),
       ),
