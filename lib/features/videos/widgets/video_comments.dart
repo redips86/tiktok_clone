@@ -44,6 +44,7 @@ class _VideoCommentsState extends State<VideoComments> {
       child: Scaffold(
         backgroundColor: Colors.grey.shade50,
         appBar: AppBar(
+          centerTitle: true,
           backgroundColor: Colors.grey.shade50,
           automaticallyImplyLeading: false,
           title: const Text("22796 comments"),
