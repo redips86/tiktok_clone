@@ -15,7 +15,7 @@ class _InboxScreenState extends State<InboxScreen> {
   void _onDmPressed() {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => const ChatScreen(),
+        builder: (context) => const ChatsScreen(),
       ),
     );
   }
