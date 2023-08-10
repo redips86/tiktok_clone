@@ -11,6 +11,39 @@ class ChatDetailScreen extends StatefulWidget {
 }
 
 class _ChatDetailScreenState extends State<ChatDetailScreen> {
+  final TextEditingController _textEditingController = TextEditingController();
+
+  String _chatMessage = "";
+
+  @override
+  void initState() {
+    super.initState();
+    _textEditingController.addListener(() {
+      setState(() {
+        _chatMessage = _textEditingController.text;
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    _textEditingController.dispose();
+    super.dispose();
+  }
+
+  void _onDismissChat() {
+    FocusScope.of(context).unfocus();
+  }
+
+  void _onSendChat() {
+    if (_chatMessage.isNotEmpty) {
+      _textEditingController.clear();
+      _onDismissChat();
+    }
+  }
+
+  void _onChat() {}
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,69 +102,133 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
           ),
         ),
       ),
-      body: Stack(
-        children: [
-          ListView.separated(
-            padding: const EdgeInsets.symmetric(
-              vertical: Sizes.size20,
-              horizontal: Sizes.size14,
-            ),
-            itemBuilder: (context, index) {
-              final isMine = index % 2 == 0;
-              return Row(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment:
-                    isMine ? MainAxisAlignment.end : MainAxisAlignment.start,
-                children: [
-                  Container(
-                    padding: const EdgeInsets.all(Sizes.size14),
-                    decoration: BoxDecoration(
-                      color:
-                          isMine ? Colors.blue : Theme.of(context).primaryColor,
-                      borderRadius: BorderRadius.only(
-                        topLeft: const Radius.circular(
-                          Sizes.size20,
-                        ),
-                        topRight: const Radius.circular(
-                          Sizes.size20,
-                        ),
-                        bottomLeft: Radius.circular(
-                          isMine ? Sizes.size20 : Sizes.size5,
-                        ),
-                        bottomRight: Radius.circular(
-                          !isMine ? Sizes.size20 : Sizes.size5,
-                        ),
-                      ),
-                    ),
-                    child: const Text(
-                      "this is a message!",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: Sizes.size16,
-                      ),
-                    ),
-                  ),
-                ],
-              );
-            },
-            separatorBuilder: (context, index) => Gaps.v10,
-            itemCount: 10,
-          ),
-          Positioned(
-            bottom: 0,
-            width: MediaQuery.of(context).size.width,
-            child: BottomAppBar(
-              color: Colors.grey.shade50,
-              child: const Row(
-                children: [
-                  Expanded(child: TextField()),
-                  Gaps.h20,
-                  FaIcon(FontAwesomeIcons.paperPlane)
-                ],
+      body: GestureDetector(
+        onTap: _onDismissChat,
+        child: Stack(
+          children: [
+            ListView.separated(
+              padding: const EdgeInsets.symmetric(
+                vertical: Sizes.size20,
+                horizontal: Sizes.size14,
               ),
+              itemBuilder: (context, index) {
+                final isMine = index % 2 == 0;
+                return Row(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment:
+                      isMine ? MainAxisAlignment.end : MainAxisAlignment.start,
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(Sizes.size14),
+                      decoration: BoxDecoration(
+                        color: isMine
+                            ? Colors.blue
+                            : Theme.of(context).primaryColor,
+                        borderRadius: BorderRadius.only(
+                          topLeft: const Radius.circular(
+                            Sizes.size20,
+                          ),
+                          topRight: const Radius.circular(
+                            Sizes.size20,
+                          ),
+                          bottomLeft: Radius.circular(
+                            isMine ? Sizes.size20 : Sizes.size5,
+                          ),
+                          bottomRight: Radius.circular(
+                            !isMine ? Sizes.size20 : Sizes.size5,
+                          ),
+                        ),
+                      ),
+                      child: const Text(
+                        "this is a message!",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: Sizes.size16,
+                        ),
+                      ),
+                    ),
+                  ],
+                );
+              },
+              separatorBuilder: (context, index) => Gaps.v10,
+              itemCount: 10,
             ),
-          )
-        ],
+            Positioned(
+              bottom: 0,
+              width: MediaQuery.of(context).size.width,
+              child: BottomAppBar(
+                padding: const EdgeInsets.symmetric(
+                    horizontal: Sizes.size12, vertical: Sizes.size12),
+                color: Colors.grey.shade50,
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: SizedBox(
+                        height: Sizes.size44,
+                        child: TextField(
+                          controller: _textEditingController,
+                          onTap: _onChat,
+                          expands: true,
+                          minLines: null,
+                          maxLines: null,
+                          textInputAction: TextInputAction.newline,
+                          cursorColor: Theme.of(context).primaryColor,
+                          decoration: InputDecoration(
+                              hintText: "Send a message...",
+                              border: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.circular(Sizes.size12),
+                                borderSide: BorderSide.none,
+                              ),
+                              filled: true,
+                              fillColor: Colors.white,
+                              contentPadding: const EdgeInsets.symmetric(
+                                horizontal: Sizes.size12,
+                              ),
+                              suffixIcon: const Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  FaIcon(
+                                    FontAwesomeIcons.faceGrin,
+                                    color: Colors.black,
+                                    size: Sizes.size24,
+                                  ),
+                                ],
+                              )),
+                        ),
+                      ),
+                    ),
+                    Gaps.h10,
+                    GestureDetector(
+                      onTap: _onSendChat,
+                      child: Container(
+                        decoration: BoxDecoration(
+                            border: Border.all(
+                              width: Sizes.size6,
+                              color: _chatMessage.isNotEmpty
+                                  ? Colors.blue
+                                  : Colors.grey.shade300,
+                            ),
+                            shape: BoxShape.circle,
+                            color: _chatMessage.isNotEmpty
+                                ? Colors.blue
+                                : Colors.grey.shade300),
+                        child: FaIcon(
+                          _chatMessage.isNotEmpty
+                              ? FontAwesomeIcons.paperPlane
+                              : FontAwesomeIcons.solidPaperPlane,
+                          size: Sizes.size20,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
