@@ -77,7 +77,7 @@ class _VideoPostState extends State<VideoPost>
       _videoPlayerController.play();
     }
 
-    if(_videoPlayerController.value.isPlaying && info.visibleFraction == 0){
+    if (_videoPlayerController.value.isPlaying && info.visibleFraction == 0) {
       _onTogglePause();
     }
   }
@@ -151,12 +151,12 @@ class _VideoPostState extends State<VideoPost>
               ),
             ),
           ),
-          Positioned(
+          const Positioned(
             bottom: 20,
             left: 10,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
+              children: [
                 Text(
                   "@redips",
                   style: TextStyle(
