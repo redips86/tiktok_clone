@@ -79,10 +79,10 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen> {
       body: SizedBox(
         width: MediaQuery.of(context).size.width,
         child: !_hasPermission || !_cameraController.value.isInitialized
-            ? Column(
+            ? const Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
+                children: [
                   Text(
                     "Initializing...",
                     style:
